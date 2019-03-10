@@ -14,7 +14,7 @@ public class Main {
 
         Parsing parsing = new Parsing();
 
-        List<String> date = parsing.date_int();
+       /* List<String> date = parsing.date_int();
         for (; max < date.size(); day += step, min += step, max += step) {
             SQL.creare(date.get(day), date.get(min), date.get(max));
 
@@ -23,5 +23,8 @@ public class Main {
         System.out.println(new Date());
 
         SQL.get_result("weather");
+        */
+
+       SQL.condition();
     }
 }

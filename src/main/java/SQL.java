@@ -78,5 +78,31 @@ public class SQL {
         }
 
 
+        public static void condition() throws SQLException {
+            try {
+                Driver driver = new FabricMySQLDriver();
+                DriverManager.registerDriver(driver);
 
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
+            Connection connection = DriverManager.getConnection(URL, Surname, PAssword);
+            java.sql.Statement statement = connection.createStatement();
+
+            statement.clearBatch();
+            ResultSet res = statement.executeQuery("SELECT EXISTS(SELECT DATE FROM weather WHERE date = -3) ");
+            while (res.next()) {
+
+
+                String id = res.getString(1);
+                System.out.println(id);
+
+
+            }
+
+
+        }
 }
