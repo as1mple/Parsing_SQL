@@ -14,17 +14,25 @@ public class Main {
 
         Parsing parsing = new Parsing();
 
-       /* List<String> date = parsing.date_int();
+        parsing.res();
+
+       List<String> date = parsing.date_int();
+
+
         for (; max < date.size(); day += step, min += step, max += step) {
-            SQL.creare(date.get(day), date.get(min), date.get(max));
+            if (!(SQL.condition("date", date.get(day)))) {
+                SQL.creare(date.get(day), date.get(min), date.get(max));
 
-
+            }
         }
+        parsing.getTitle();
         System.out.println(new Date());
 
-        SQL.get_result("weather");
-        */
+        SQL.get_result("WR");
 
-       SQL.condition();
+
+
+       // System.out.println(SQL.condition("date", "-2"));
+       // System.out.println(SQL.condition("date", "10"));
     }
 }

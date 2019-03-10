@@ -8,6 +8,7 @@ public class SQL {
     private static final String URL = "jdbc:mysql://localhost:3306/mydbtest";
     private static String Surname = "root";
     private static String PAssword = "";
+    private static String table = "WR";
 
 
 
@@ -36,7 +37,7 @@ public class SQL {
 
 
 
-                statement.execute("INSERT INTO weather (DATE, MIN, MAX ) values  (" + el1 + "," + el2 + "," + el3 + ")"); //добавление данных
+                statement.execute("INSERT INTO " + table + " (DATE, MIN, MAX ) values  (" + el1 + "," + el2 + "," + el3 + ")"); //добавление данных
 
                 statement.executeBatch();
 
@@ -78,8 +79,9 @@ public class SQL {
         }
 
 
-        public static void condition() throws SQLException {
-            try {
+        public static boolean condition(String date, String wht) throws SQLException {
+        boolean flag = false;
+        try {
                 Driver driver = new FabricMySQLDriver();
                 DriverManager.registerDriver(driver);
 
@@ -93,16 +95,23 @@ public class SQL {
             java.sql.Statement statement = connection.createStatement();
 
             statement.clearBatch();
-            ResultSet res = statement.executeQuery("SELECT EXISTS(SELECT DATE FROM weather WHERE date = -3) ");
+           ResultSet res = statement.executeQuery("SELECT EXISTS(SELECT " + date +" date FROM "+ table + " WHERE " + date + "  = "+  wht + ")  ");
+           // ResultSet res = statement.executeQuery("SELECT EXISTS(SELECT "+ place +" FROM weather WHERE "+" place " +" = " + wht + ")" );
             while (res.next()) {
 
 
                 String id = res.getString(1);
-                System.out.println(id);
 
+                flag = id.equals("1") ? true : false;
+
+                /// System.out.println(id);
+
+
+
+            }
+            return  flag;
 
             }
 
 
         }
-}
