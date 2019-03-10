@@ -5,6 +5,8 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Parsing {
@@ -16,6 +18,10 @@ public class Parsing {
 
     private ArrayList<Article> list = pars();
 
+
+    public ArrayList<Article> getList() {
+        return list;
+    }
 
     public void res() {
         ArrayList<Article> list = this.list;
@@ -34,7 +40,8 @@ public class Parsing {
         while (flag) {
 
             try {
-                String place = new Scanner(System.in).nextLine();
+               // String place = new Scanner(System.in).nextLine();
+                String place = "винница";
 
                 doc = Jsoup.connect("https://sinoptik.ua/погода-" + place).get();
                 flag = false;
@@ -51,6 +58,9 @@ public class Parsing {
 
     public ArrayList<Article> pars() {
 
+
+
+
         ArrayList<Article> list = new ArrayList<Article>();
 
         Elements elements = doc.getElementsByAttributeValue("class", "tabs"); //анализ считаного документа
@@ -62,6 +72,20 @@ public class Parsing {
             }
         });
         /*list.forEach(System.out::println);*/
+
         return list;
     }
+
+    public List<String> date_int(){
+        String str = getList().toString();
+        str = str.replaceAll("[^-?0-9]+", " ");
+        List<String> date = Arrays.asList(str.trim().split(" "));
+
+
+        return date;
+    }
+
+
+
+
 }
